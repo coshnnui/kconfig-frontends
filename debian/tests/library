@@ -1,0 +1,28 @@
+#!/bin/sh
+# autopkgtest check: Test if library can be included.
+
+set -e
+
+WORKDIR=$(mktemp -d)
+trap "rm -rf $WORKDIR" 0 INT QUIT ABRT PIPE TERM
+cd $WORKDIR
+
+cat <<EOF > parsertest.c
+#include <kconfig/expr.h>
+
+int main() {
+    struct expr* e;
+
+    expr_alloc_one(E_AND, e);
+    expr_free(e);
+
+    return 0;
+}
+EOF
+
+gcc -o parsertest parsertest.c `pkg-config --cflags --libs kconfig-parser`
+echo "build: OK"
+
+[ -x parsertest ]
+./parsertest
+echo "run: OK"

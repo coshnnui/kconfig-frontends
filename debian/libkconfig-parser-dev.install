@@ -1,0 +1,4 @@
+usr/lib/*/libkconfig-parser.so
+usr/lib/*/libkconfig-parser.a
+usr/lib/*/pkgconfig
+usr/include/kconfig

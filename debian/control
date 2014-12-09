@@ -1,0 +1,83 @@
+Source: kconfig-frontends
+Section: devel
+Priority: extra
+Maintainer: George Hopkins <george-hopkins@null.net>
+Build-Depends: debhelper (>= 9), dh-autoreconf, pkg-config, gperf, flex,
+ bison, libncurses5-dev, libglade2-dev, libqt4-dev
+Standards-Version: 3.9.5
+Homepage: http://ymorin.is-a-geek.org/projects/kconfig-frontends
+Vcs-Git: https://github.com/george-hopkins/kconfig-frontends.git
+Vcs-Browser: https://github.com/george-hopkins/kconfig-frontends
+XS-Testsuite: autopkgtest
+
+Package: kconfig-all
+Architecture: all
+Depends: ${misc:Depends}, kconfig (>= ${source:Version}),
+ kconfig-qt (>= ${source:Version}), kconfig-gtk2 (>= ${source:Version}),
+ kconfig-ncurses (>= ${source:Version})
+Description: all Kconfig frontends (metapackage)
+ Kconfig is the configuration language used by the Linux kernel. This package
+ contains all frontends and the parser found in the Linux kernel
+ source tree.
+
+Package: kconfig
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, python,
+ libkconfig-parser0 (>= ${source:Version})
+Multi-Arch: foreign
+Description: basic frontend and utilities for Kconfig
+ Kconfig is the configuration language used by the Linux kernel.
+ .
+ This package contains a basic frontend and some useful utilities.
+
+Package: libkconfig-parser0
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Pre-Depends: ${misc:Pre-Depends}
+Multi-Arch: same
+Description: generic Kconfig parser library
+ Kconfig is the configuration language used by the Linux kernel.
+ .
+ This package contains the parser library.
+
+Package: libkconfig-parser-dev
+Architecture: any
+Section: libdevel
+Depends: libkconfig-parser0 (= ${binary:Version}), ${misc:Depends}
+Multi-Arch: same
+Description: generic Kconfig parser library (development files)
+ Kconfig is the configuration language used by the Linux kernel.
+ .
+ Install this package if you wish to develop your own programs using
+ the Kconfig parser library.
+
+Package: kconfig-qt
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends},
+ kconfig (>= ${source:Version})
+Multi-Arch: foreign
+Description: QT frontend for Kconfig
+ Kconfig is the configuration language used by the Linux kernel.
+ .
+ This package contains a QT-based frontend.
+
+Package: kconfig-gtk2
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends},
+ kconfig (>= ${source:Version})
+Multi-Arch: foreign
+Description: GTK2 frontend for Kconfig
+ Kconfig is the configuration language used by the Linux kernel.
+ .
+ This package contains a GTK2-based frontend.
+
+Package: kconfig-ncurses
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends},
+ kconfig (>= ${source:Version})
+Multi-Arch: foreign
+Description: ncurses frontend for Kconfig
+ Kconfig is the configuration language used by the Linux kernel.
+ .
+ This package contains two ncurses-based frontends.

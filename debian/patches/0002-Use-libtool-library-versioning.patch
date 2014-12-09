@@ -1,0 +1,36 @@
+From: George Hopkins <george-hopkins@null.net>
+Date: Sun, 7 Dec 2014 21:22:27 +0100
+Subject: Use libtool library versioning
+
+---
+ configure.ac            |    2 +-
+ libs/parser/Makefile.am |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index db5ef3b..bde4c58 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -466,7 +466,7 @@ AM_CONDITIONAL(
+ # Get the version to apply to the parser shared library
+ AC_SUBST(
+     [KCONFIGPARSER_LIB_VERSION],
+-    [m4_esyscmd_s([./scripts/version.sh --plain])])
++    ["0:0:0"])
+ 
+ #----------------------------------------
+ # Finalise
+diff --git a/libs/parser/Makefile.am b/libs/parser/Makefile.am
+index 76b9830..86853a2 100644
+--- a/libs/parser/Makefile.am
++++ b/libs/parser/Makefile.am
+@@ -10,7 +10,7 @@ libkconfig_parser_la_CPPFLAGS = -DROOTMENU="\"$(root_menu)\""   \
+                                 -DCONFIG_=\"$(config_prefix)\"  \
+                                 $(intl_CPPFLAGS)
+ libkconfig_parser_la_CFLAGS = $(AM_CFLAGS) $(kf_CFLAGS)
+-libkconfig_parser_la_LDFLAGS = -release $(KCONFIGPARSER_LIB_VERSION) -no-undefined
++libkconfig_parser_la_LDFLAGS = -version-info $(KCONFIGPARSER_LIB_VERSION) -no-undefined
+ libkconfig_parser_la_LIBADD = $(intl_LIBS)
+ 
+ kconfig_includedir = $(includedir)/kconfig
+-- 

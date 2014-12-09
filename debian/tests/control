@@ -1,0 +1,5 @@
+Tests: conf
+Depends: kconfig
+
+Tests: library
+Depends: build-essential, pkg-config, libkconfig-parser-dev

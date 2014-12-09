@@ -1,0 +1,5 @@
+usr/bin/kconfig-conf
+usr/bin/kconfig-diff
+usr/bin/kconfig-gettext
+usr/bin/kconfig-merge
+usr/bin/kconfig-tweak

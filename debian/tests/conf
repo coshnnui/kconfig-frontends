@@ -1,0 +1,58 @@
+#!/bin/sh
+# autopkgtest check: Test kconfig-conf --allyesconfig
+
+set -e
+
+WORKDIR=$(mktemp -d)
+trap "rm -rf $WORKDIR" 0 INT QUIT ABRT PIPE TERM
+cd $WORKDIR
+
+cat <<EOF > Kconfig
+menuconfig SAMPLES
+	bool "Sample kernel code"
+	help
+	  You can build and test sample kernel code here.
+
+if SAMPLES
+
+config SAMPLE_YES1
+	bool "Build kobject examples -- loadable modules only"
+	help
+	  This config option will allow you to build a number of
+	  different kobject sample modules showing how to use kobjects,
+	  ksets, and ktypes properly.
+
+config SAMPLE_NO1
+	tristate "Build kdb command example -- loadable modules only"
+	depends on KGDB_KDB
+	help
+	  Build an example of how to dynamically add the hello
+	  command to the kdb shell.
+
+config SAMPLE_NO2
+	bool "Build simple hidraw example"
+	depends on HIDRAW && HEADERS_CHECK
+	help
+	  Build an example of how to use hidraw from userspace.
+
+endif # SAMPLES
+
+config SAMPLE_YES2
+	bool "Build kernel hardware breakpoint examples -- loadable module only"
+	help
+	  This builds kernel hardware breakpoint example modules.
+EOF
+
+cat <<EOF > config.expected
+#
+# Automatically generated file; DO NOT EDIT.
+# Configuration
+#
+CONFIG_SAMPLES=y
+CONFIG_SAMPLE_YES1=y
+CONFIG_SAMPLE_YES2=y
+EOF
+
+kconfig-conf --allyesconfig Kconfig
+
+cmp config.expected .config

@@ -1,0 +1,64 @@
+From: George Hopkins <george-hopkins@null.net>
+Date: Sun, 7 Dec 2014 18:59:12 +0100
+Subject: Add kconfig-parser.pc
+
+---
+ configure.ac                     |    3 ++-
+ libs/parser/Makefile.am          |    3 +++
+ libs/parser/kconfig-parser.pc.in |   11 +++++++++++
+ 3 files changed, 16 insertions(+), 1 deletion(-)
+ create mode 100644 libs/parser/kconfig-parser.pc.in
+
+diff --git a/configure.ac b/configure.ac
+index 2f1817e..db5ef3b 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -49,7 +49,7 @@ AC_SUBST([SILENT_MAKEFLAGS])
+ # Prepare libtool
+ m4_ifdef([AM_PROG_AR], [AM_PROG_AR]) dnl Automake, we have a problem...
+ LT_PREREQ([2.2.6])
+-LT_INIT([disable-static])
++LT_INIT()
+ 
+ #---------------------------------------------------------------------------
+ # Set misc options
+@@ -477,6 +477,7 @@ AC_CONFIG_FILES([
+     libs/images/Makefile
+     libs/lxdialog/Makefile
+     libs/parser/Makefile
++    libs/parser/kconfig-parser.pc
+     frontends/Makefile
+     frontends/conf/Makefile
+     frontends/mconf/Makefile
+diff --git a/libs/parser/Makefile.am b/libs/parser/Makefile.am
+index 567b1e8..76b9830 100644
+--- a/libs/parser/Makefile.am
++++ b/libs/parser/Makefile.am
+@@ -16,6 +16,9 @@ libkconfig_parser_la_LIBADD = $(intl_LIBS)
+ kconfig_includedir = $(includedir)/kconfig
+ kconfig_include_HEADERS = list.h lkc.h expr.h lkc_proto.h
+ 
++pkgconfigdir = $(libdir)/pkgconfig
++dist_pkgconfig_DATA = kconfig-parser.pc
++
+ BUILT_SOURCES = hconf.c lconf.c
+ CLEANFILES = hconf.c lconf.c yconf.c
+ EXTRA_DIST = yconf.y.patch
+diff --git a/libs/parser/kconfig-parser.pc.in b/libs/parser/kconfig-parser.pc.in
+new file mode 100644
+index 0000000..9dc2ac5
+--- /dev/null
++++ b/libs/parser/kconfig-parser.pc.in
+@@ -0,0 +1,11 @@
++prefix=@prefix@
++exec_prefix=@exec_prefix@
++libdir=@libdir@
++includedir=@includedir@
++
++Name: Kconfig parser
++Description: A simple library to parse Kconfig files.
++Version: @VERSION@
++Requires:
++Cflags: -I${includedir}
++Libs: -L${libdir} -lkconfig-parser
+-- 
