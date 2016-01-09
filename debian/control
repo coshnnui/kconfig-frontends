@@ -8,7 +8,6 @@ Standards-Version: 3.9.5
 Homepage: http://ymorin.is-a-geek.org/projects/kconfig-frontends
 Vcs-Git: https://github.com/george-hopkins/kconfig-frontends.git
 Vcs-Browser: https://github.com/george-hopkins/kconfig-frontends
-XS-Testsuite: autopkgtest
 
 Package: kconfig-all
 Architecture: all
