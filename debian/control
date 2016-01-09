@@ -4,7 +4,7 @@ Priority: extra
 Maintainer: George Hopkins <george-hopkins@null.net>
 Build-Depends: debhelper (>= 9), dh-autoreconf, pkg-config, gperf, flex,
  bison, libncurses5-dev, libglade2-dev, libqt4-dev
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: http://ymorin.is-a-geek.org/projects/kconfig-frontends
 Vcs-Git: https://github.com/george-hopkins/kconfig-frontends.git
 Vcs-Browser: https://github.com/george-hopkins/kconfig-frontends
